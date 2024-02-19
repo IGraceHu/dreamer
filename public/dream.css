@@ -1,3 +1,6 @@
+button{
+    margin:5px;
+}
 .dream{
     border-style: solid;
     border-radius: 10px;
@@ -12,6 +15,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: scroll;
     z-index: 1; /* Make sure the popup is on top of everything else */
   }
 
@@ -24,3 +28,4 @@
     padding: 20px;
     border-radius: 8px;
   }
+
