@@ -21,13 +21,19 @@ querySnapshot.forEach((doc) => {
     const content = document.createElement('div');
     content.textContent = data.dream; 
 
-    const button = document.createElement('button');
-    button.textContent = "Interpret"
-    button.addEventListener("click", openInterpretationPopup)
+    const interpretButton = document.createElement('button');
+    interpretButton.textContent = "Interpret"
+    interpretButton.addEventListener("click", ()=>openInterpretationPopup(data.dream))
+
+    const storyButton = document.createElement('button');
+    storyButton.textContent = "Create Story"
+    storyButton.addEventListener("click", ()=>openStoryPopup(data.dream))
+
     // Append the title and content to the new div
     newDiv.appendChild(title);
     newDiv.appendChild(content);
-    newDiv.appendChild(button)
+    newDiv.appendChild(interpretButton)
+    newDiv.appendChild(storyButton)
     // Append the new div to the target div
     dream_container.appendChild(newDiv);
 
@@ -42,15 +48,15 @@ function formatDate(date){
     return formattedDate;
 }
 
-function openInterpretationPopup(){
-  document.getElementById("interpretationPopup").style.display = "block";
-  document.getElementById("interpretationPopupText").textContent = "loading"
+function openStoryPopup(dream){
+  document.getElementById("storyPopup").style.display = "block";
+  document.getElementById("storyPopupText").textContent = "loading"
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    "dream": "I woke up in a basement surrounded by rats"
+    "dream": dream
   });
 
   var requestOptions = {
@@ -59,12 +65,37 @@ function openInterpretationPopup(){
     body: raw,
     redirect: 'follow'  };
 
-  fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/interpret", requestOptions)
+  fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/story", requestOptions)
     .then(response => response.text())
-    .then(response => document.getElementById("interpretationPopupText").innerHTML = boldText(response))
+    .then(response => document.getElementById("storyPopupText").innerHTML = boldText(response))
     .catch(error => console.log('error', error));
   }
 
-  function boldText(text) {
-    return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-  }
+
+  function openInterpretationPopup(dream){
+    document.getElementById("interpretationPopup").style.display = "block";
+    document.getElementById("interpretationPopupText").textContent = "loading"
+  
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    var raw = JSON.stringify({
+      "dream": dream
+    });
+  
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'  };
+  
+    fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/interpret", requestOptions)
+      .then(response => response.text())
+      .then(response => document.getElementById("interpretationPopupText").innerHTML = boldText(response))
+      .catch(error => console.log('error', error));
+    }
+  
+    function boldText(text) {
+      return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    }
+  

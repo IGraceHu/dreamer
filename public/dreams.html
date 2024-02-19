@@ -18,18 +18,27 @@
 
   <a href="/public/journal.html">Click here to add a dream</a>
 
-  <div class="interpretationPopup" id="interpretationPopup">
-    <div class="interpretationPopupContent">
-    <span class="popup-close" onclick="closeInterpretationPopup()">&times;</span>
+  <div class="popup" id="interpretationPopup">
+    <div class="popupContent">
+    <span class="popup-close" onclick="closePopups()">&times;</span>
     <h2>Your Interpretations</h2>
     <p id="interpretationPopupText">default text</p>
+  </div>
+  </div>
+  <div class="popup" id="storyPopup">
+    <div class="popupContent">
+    <span class="popup-close" onclick="closePopups()">&times;</span>
+    <h2>Your Story</h2>
+    <p id="storyPopupText">default text</p>
   </div>
   </div>
   </body>
 
   <script>
-    function closeInterpretationPopup(){
+    function closePopups(){
       document.getElementById("interpretationPopup").style.display = "none";
+      document.getElementById("storyPopup").style.display = "none";
+
     }
   </script>
 </html>
