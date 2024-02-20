@@ -1,0 +1,40 @@
+* {
+    --background-color: white;
+    --main-color: rgb(95, 12, 118);
+    --primary-accent-color: purple;
+    --secondary-accent-color: rgb(203, 75, 178);
+
+    --text-color: black;
+    --text-hover-color: grey;
+    --text-accent-color: white;
+
+}
+
+body {
+    overflow-y: hidden;
+}
+
+.navbar {
+    background-color: var(--main-color);
+}
+
+.nav {
+    background-color: var(--main-color);
+}
+
+#main-side-nav {
+    float: left;
+    height: 100vh;
+    width: 75px;
+    color: var(--text-accent-color);
+    /* --bs-nav-pills-border-radius: ; */
+    --bs-nav-link-color: var(--text-accent-color);
+    --bs-nav-link-hover-color: var(--text-hover-color);
+    /* --bs-nav-link-disabled-color: ; */
+    --bs-nav-pills-link-active-color: var(--text-accent-color);
+    --bs-nav-pills-link-active-bg: var(--primary-accent-color);
+}
+
+.nav-item {
+    padding: 5px;
+}
