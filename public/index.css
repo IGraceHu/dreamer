@@ -1,3 +1,5 @@
+/**************************** GENERAL STYLING *********************************/
+
 * {
     --background-color: white;
     --border-color: lightgrey;
@@ -14,6 +16,9 @@
 body {
     overflow-y: hidden;
 }
+
+
+/********************************** NAVBARS ***********************************/
 
 .navbar {
     background-color: var(--main-color);
@@ -43,6 +48,9 @@ body {
 .nav-icon {
     font-size: 32px;
 }
+
+
+/****************************** DREAMS NOTE LIST ******************************/
 
 #dreams-list {
     width: 400px;
