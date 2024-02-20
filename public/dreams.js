@@ -1,9 +1,9 @@
 import { db } from './firebase-init.js';
-import { collection, getDocs, query  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
+import { collection, getDocs, query, orderBy  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
  
 const dream_container = document.getElementById("dream-container");
 
-const q = query(collection(db, "dreams"));
+const q = query(collection(db, "dreams"), orderBy("timestamp", "desc"));
 
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
