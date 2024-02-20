@@ -1,5 +1,6 @@
 * {
     --background-color: white;
+    --border-color: lightgrey;
     --main-color: rgb(95, 12, 118);
     --primary-accent-color: purple;
     --secondary-accent-color: rgb(203, 75, 178);
@@ -37,4 +38,28 @@ body {
 
 .nav-item {
     padding: 5px;
+}
+
+.nav-icon {
+    font-size: 32px;
+}
+
+#dreams-list {
+    width: 400px;
+    height: 100vh;
+    padding: 0 20px;
+    border-right: solid 2px var(--border-color);
+    overflow-y: scroll;
+}
+
+#dreams-top {
+    position: sticky;
+    top: 0;
+    background-color: var(--background-color);
+    padding: 10px 0;
+    z-index: 99;
+}
+
+#day-list {
+    margin: 10px 0;
 }
