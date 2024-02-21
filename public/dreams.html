@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dreamer</title>
+  <link rel="stylesheet" href="dream.css">
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-init.js" type="module"></script>
+  <script src="dreams.js" type="module"></script>
+
+</head>
+<body>
+  <h1>All Dreams</h1>
+
+  <div class="dream-container" id="dream-container"></div>
+
+  <a href="/public/journal.html">Click here to add a dream</a>
+
+  <div class="popup" id="interpretationPopup">
+    <div class="popupContent">
+    <span class="popup-close" onclick="closePopups()">&times;</span>
+    <h2>Your Interpretations</h2>
+    <p id="interpretationPopupText">default text</p>
+  </div>
+  </div>
+  <div class="popup" id="storyPopup">
+    <div class="popupContent">
+    <span class="popup-close" onclick="closePopups()">&times;</span>
+    <h2>Your Story</h2>
+    <p id="storyPopupText">default text</p>
+  </div>
+  </div>
+  </body>
+
+  <script>
+    function closePopups(){
+      document.getElementById("interpretationPopup").style.display = "none";
+      document.getElementById("storyPopup").style.display = "none";
+
+    }
+  </script>
+</html>
