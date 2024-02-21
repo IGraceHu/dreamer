@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dreamer</title>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="style.css">
   <script src="index.js"></script>
 
   <!-- Bootstrap things -->
@@ -95,7 +95,7 @@
   </ul>
 
   <!-------------------- MAIN BODY -------------------------------------------->
-  <div id="main-body" class="container">
+  <div id="main-body" class="container d-flex">
 
     <!-------------------- DREAMS NOTE LIST ----------------------------------->
     <div id="dreams-list">
@@ -132,13 +132,15 @@
           <li class="list-group-item">And a fifth one</li>
         </ul>
       </div>
-
     </div>
+    
+    <!-------------------- CONTENT CONTAINER ---------------------------------->
+    <div>
+      <h1>Welcome to Dreamer</h1>
+      <a href="/public/journal.html">Click here to go to journal</a>
 
-    <h1>Welcome to Dreamer</h1>
-    <a href="/public/journal.html">Click here to go to journal</a>
-
-    <div id="firebaseui-auth-container"></div>
+      <div id="firebaseui-auth-container"></div>
+    </div>
   </div>
 
 </body>
