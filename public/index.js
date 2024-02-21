@@ -1,7 +1,8 @@
 import { db } from './firebase-init.js';
-import { collection, getDocs, query, orderBy  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
+import { collection, getDocs, query, orderBy, doc, getDoc  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
  
 const dreams_list = document.getElementById("dreams-list");
+const dream_container = document.getElementById("dream-container");
 
 const q = query(collection(db, "dreams"), orderBy("timestamp", "desc"));
 
@@ -40,7 +41,10 @@ function formatDate(date) {
     return formattedDate;
 }
 
-function getDream(id) {
-    console.log(id, " clicked");
+async function getDream(id) {
+    const dreamRef = doc(db, "dreams", id);
+    const dream = await getDoc(dreamRef);
+
+    dream_container.innerHTML = `<p>${dream.data().dream}</p>`;
     return 0;
 }

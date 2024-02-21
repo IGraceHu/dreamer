@@ -11,11 +11,16 @@
     --text-hover-color: grey;
     --text-dark-color: white;
     --text-accent-color: grey;
+    --text-hover-accent-color: rgb(203, 75, 178);
 
 }
 
 body {
     overflow-y: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
 }
 
 
@@ -36,7 +41,7 @@ body {
     color: var(--text-dark-color);
     /* --bs-nav-pills-border-radius: ; */
     --bs-nav-link-color: var(--text-dark-color);
-    --bs-nav-link-hover-color: var(--text-hover-color);
+    --bs-nav-link-hover-color: var(--text-hover-accent-color);
     /* --bs-nav-link-disabled-color: ; */
     --bs-nav-pills-link-active-color: var(--text-dark-color);
     --bs-nav-pills-link-active-bg: var(--primary-accent-color);
@@ -54,7 +59,7 @@ body {
 /****************************** DREAMS NOTE LIST ******************************/
 
 #dreams-list-container {
-    width: 400px;
+    width: 300px;
     height: calc(100vh - 55px);
     padding: 0 10px;
     border-right: solid 2px var(--border-color);
