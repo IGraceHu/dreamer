@@ -82,3 +82,8 @@ body {
 #dreams-list .list-group-item h4 {
     color: var(--text-color);
 }
+
+#dreams-list .list-group-item:hover {
+    background-color: var(--border-color);
+    cursor: pointer;
+}

@@ -1,7 +1,7 @@
 import { db } from './firebase-init.js';
 import { collection, getDocs, query, orderBy  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
  
-const dreans_list = document.getElementById("dreams-list");
+const dreams_list = document.getElementById("dreams-list");
 
 const q = query(collection(db, "dreams"), orderBy("timestamp", "desc"));
 
@@ -13,6 +13,7 @@ querySnapshot.forEach((doc) => {
 
     const newDream = document.createElement('li')
     newDream.classList.add('list-group-item'); 
+    newDream.addEventListener("click", function(){ getDream(doc.id); }); 
 
     // Create the title element
     const title = document.createElement('h4');
@@ -27,14 +28,19 @@ querySnapshot.forEach((doc) => {
     newDream.appendChild(content);
     // Append the new div to the target div
     
-    dreans_list.appendChild(newDream);
+    dreams_list.appendChild(newDream);
 });
 
-function formatDate(date){
+function formatDate(date) {
     const day = date.getDate();
     const month = date.getMonth() + 1; // Add 1 for human-readable month
     const year = date.getFullYear();
 
     const formattedDate = `${day.toString().padStart(2, '0')}-${month.toString().padStart(2, '0')}-${year}`;
     return formattedDate;
+}
+
+function getDream(id) {
+    console.log(id, " clicked");
+    return 0;
 }
