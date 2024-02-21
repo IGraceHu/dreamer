@@ -9,7 +9,8 @@
 
     --text-color: black;
     --text-hover-color: grey;
-    --text-accent-color: white;
+    --text-dark-color: white;
+    --text-accent-color: grey;
 
 }
 
@@ -32,12 +33,12 @@ body {
     float: left;
     height: 100vh;
     width: 75px;
-    color: var(--text-accent-color);
+    color: var(--text-dark-color);
     /* --bs-nav-pills-border-radius: ; */
-    --bs-nav-link-color: var(--text-accent-color);
+    --bs-nav-link-color: var(--text-dark-color);
     --bs-nav-link-hover-color: var(--text-hover-color);
     /* --bs-nav-link-disabled-color: ; */
-    --bs-nav-pills-link-active-color: var(--text-accent-color);
+    --bs-nav-pills-link-active-color: var(--text-dark-color);
     --bs-nav-pills-link-active-bg: var(--primary-accent-color);
 }
 
@@ -52,10 +53,10 @@ body {
 
 /****************************** DREAMS NOTE LIST ******************************/
 
-#dreams-list {
+#dreams-list-container {
     width: 400px;
-    height: 100vh;
-    padding: 0 20px;
+    height: calc(100vh - 55px);
+    padding: 0 10px;
     border-right: solid 2px var(--border-color);
     overflow-y: scroll;
 }
@@ -68,6 +69,16 @@ body {
     z-index: 99;
 }
 
-#day-list {
+#dreams-list {
     margin: 10px 0;
+}
+
+#dreams-list .list-group-item {
+    height: 97px;
+    overflow: hidden;
+    color: var(--text-accent-color);
+}
+
+#dreams-list .list-group-item h4 {
+    color: var(--text-color);
 }
