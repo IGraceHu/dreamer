@@ -33,7 +33,7 @@ async function generateDreams(userId){
     
         const newDream = document.createElement('li')
         newDream.classList.add('list-group-item'); 
-        newDream.addEventListener("click", function(){ getDream(doc.id); }); 
+        newDream.addEventListener("click", function(){ getDream(doc.id, userId.uid); }); 
     
         // Create the title element
         const title = document.createElement('h4');
@@ -61,10 +61,10 @@ function formatDate(date) {
     return formattedDate;
 }
 
-async function getDream(id) {
-    const dreamRef = doc(db, "dreams", id);
+async function getDream(id, userId) {
+    const dreamRef = doc(db, "users/" + userId + "/dreams", id);
     const dream = await getDoc(dreamRef);
-
+    console.log(dream.data().dream)
     dream_container.innerHTML = `<p>${dream.data().dream}</p>`;
     return 0;
 }
