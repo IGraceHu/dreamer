@@ -1,0 +1,71 @@
+h1 {
+
+    font-family: "Modak";
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+
+    padding: 10px;
+    --bg-size: 400%;
+    --color-one: hsl(325, 94%, 69%);
+    --color-two: hsl(276, 91%, 71%);
+    font-size: clamp(3rem, 25vmin, 10rem) !important;
+    background: linear-gradient(
+                    90deg,
+                    var(--color-one),
+                    var(--color-two),
+                    var(--color-one)
+                ) 0 0 / var(--bg-size) 100%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: move-bg 8s infinite linear;
+}
+
+#title{
+    margin-left: 20px;
+    margin-top: 10px;
+    font-family: "Modak";
+    font-size:30px;
+    color:#b15eb2;
+
+}
+
+nav {
+    background: linear-gradient(to right, rgb(95, 12, 118),#b15eb2);
+}
+
+#signInButton {
+    border-radius: 10px !important;
+}
+
+video{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+/* .video-wrapper {
+    border: 2px solid #000;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+@media (prefers-reduced-motion: no-preference) {
+    .boujee-text {
+      animation: move-bg 8s linear infinite;
+    }
+    @keyframes move-bg {
+      to {
+        background-position: var(--bg-size) 0;
+      }
+    }
+  }

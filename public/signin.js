@@ -26,3 +26,54 @@ document.getElementById('signInButton').addEventListener("click", function(){
       // ...
     });
 })
+
+
+// Initialize variables and elements
+const body = document.body;
+let cursorX = 0;
+let cursorY = 0;
+let images = [];
+let imageFallDuration = 2000; // Customize fall duration in milliseconds
+
+// Function to generate a random image element
+function createRandomImage() {
+  const image = document.createElement('img');
+  image.src = `https://source.unsplash.com/random/50x50`; // Replace with your desired image source
+  image.style.position = 'absolute';
+  image.style.width = '50px';
+  image.style.height = '50px';
+  return image;
+}
+
+// Function to update cursor position based on mouse movement
+function updateCursorPosition(event) {
+  cursorX = event.clientX;
+  cursorY = event.clientY;
+}
+
+// Function to handle image creation and falling animation
+function handleImageFall() {
+  const image = createRandomImage();
+  image.style.left = cursorX + 'px';
+  image.style.top = cursorY + 'px';
+  body.appendChild(image);
+  images.push(image);
+
+  setTimeout(() => {
+    image.style.transition = `top ${imageFallDuration}ms ease-in-out`;
+    image.style.top = `${window.innerHeight + image.offsetHeight}px`;
+  }, 0);
+
+  setTimeout(() => {
+    body.removeChild(image);
+  }, imageFallDuration - 1500); // Add a slight delay to avoid image flicker
+}
+
+// Event listeners to trigger image creation
+body.addEventListener('mousemove', updateCursorPosition);
+// body.addEventListener('click', handleImageFall);
+// const setIntervalId = setInterval(handleImageFall, 100);
+// Initial image creation (optional)
+// handleImageFall(); // Uncomment to add initial image on page load
+
+
