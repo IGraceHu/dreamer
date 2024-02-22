@@ -4,15 +4,88 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dreamer</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="index.js"></script>
+  <link rel="stylesheet" href="style.css">
 
+  <!-- Bootstrap things -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+  <!-- <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyAYRc2Q924aSYmFbdWRDoAH5BMZJ2-mnGk",
+      authDomain: "dream-journal-414600.firebaseapp.com",
+      projectId: "dream-journal-414600",
+      storageBucket: "dream-journal-414600.appspot.com",
+      messagingSenderId: "411525342376",
+      appId: "1:411525342376:web:0f74df039a32fe245d8e9d",
+      measurementId: "G-35LEQN1PSE"
+    };
+  
+    // Initialize Firebase
+    const firebase = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(firebase);
+  </script> -->
+  
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+  <script src="firebase-init.js" type="module"></script>
+  <script src="index.js" type="module"></script>
+  
+  <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
 
 </head>
 <body>
-  <h1>Welcome to Dreamer</h1>
-  <a href="/public/journal.html">Click here to go to journal</a>
+  <!-------------------- NAVBARS ---------------------------------------------->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Dreamer</a>
+    </div>
+  </nav>
 
-  </body>
+  <ul id="main-side-nav" class="nav flex-column nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#"><i class="bi-journals nav-icon"></i></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="#"><i class="bi-diagram-3 nav-icon"></i></a>
+    </li>
+    <li class="nav-item" style="position: absolute; bottom: 0;">
+      <a class="nav-link" aria-current="page" href="#"><i class="bi-gear nav-icon"></i></a>
+    </li>
+  </ul>
+
+  <!-------------------- MAIN BODY -------------------------------------------->
+  <div id="main-body" class="row align-items-start">
+
+    <!-------------------- DREAMS NOTE LIST ----------------------------------->
+    <div id="dreams-list-container" class="col-4">
+      <div id="dreams-top"><h1>Dreams<i class="bi-calendar-event" style="float: right;"></i></h1></div>
+        <ul id="dreams-list" class="list-group">
+
+        </ul>
+    </div>
+    
+    <!-------------------- CONTENT CONTAINER ---------------------------------->
+    <div class="col-8">
+      <h1>Welcome to Dreamer</h1>
+      <a href="/public/journal.html">Click here to go to journal</a>
+
+      <div id="firebaseui-auth-container"></div>
+      <div id="dream-container"></div>
+    </div>
+  </div>
+
+</body>
 
 </html>
