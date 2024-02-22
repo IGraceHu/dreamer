@@ -1,5 +1,6 @@
-import { db } from './firebase-init.js';
+import { db, auth } from './firebase-init.js';
 import { collection, getDocs, doc, addDoc, serverTimestamp  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
+import { getRedirectResult, onAuthStateChanged, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"
 
 const dataInput = document.getElementById('data-input');
 const writeButton = document.getElementById('write-button');
@@ -7,11 +8,10 @@ const writeButton = document.getElementById('write-button');
 async function handleButtonClick(){
   const data = dataInput.value;
 
-    // const collectionRef = doc(db, '/dreams');
-
+  const userId = auth.currentUser.uid;
 
   try {
-    const docRef = await addDoc(collection(db, "dreams"), {
+    const docRef = await addDoc(collection(db, "users/" + userId + "/dreams" ), {
       dream: data,
       timestamp: serverTimestamp()
     });
@@ -21,5 +21,7 @@ async function handleButtonClick(){
   }
   
 };
+
+
 
 writeButton.addEventListener('click', handleButtonClick);
