@@ -3,6 +3,8 @@
  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
  // TODO: Add SDKs for Firebase products that you want to use
+ import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
  // https://firebase.google.com/docs/web/setup#available-libraries
 
  // Your web app's Firebase configuration
@@ -21,4 +23,5 @@
  const app = initializeApp(firebaseConfig);
  const analytics = getAnalytics(app);
  const db = getFirestore(app)
- export { db }
+ const auth = getAuth(app)
+ export { db, auth }
