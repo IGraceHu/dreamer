@@ -5,18 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dreamer</title>
   <link rel="stylesheet" href="dream.css">
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="firebase-init.js" type="module"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
+  
   <script src="signin.js" type="module">
     
     </script>
 </head>
 <body>
   <h1>Sign In</h1>
-    <button id='signInButton'>Sign In With Google</button>
+    <div id='signInButton' class="col s12 m6 offset-m3 center-align">
+      <a class="oauth-container btn darken-4 white black-text" style="text-transform:none">
+          <div class="left">
+              <img width="20px" style="margin-top:7px; margin-right:8px" alt="Google sign-in" 
+                  src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" />
+          </div>
+          Login with Google
+      </a>
+  </div>
+  
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   </body>
 
 

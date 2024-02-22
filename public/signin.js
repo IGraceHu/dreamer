@@ -3,7 +3,7 @@ import { signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/fir
 
 const provider = new GoogleAuthProvider();
 
-document.getElementById('signInButton').onclick = function(){
+document.getElementById('signInButton').addEventListener("click", function(){
     signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
@@ -25,4 +25,4 @@ document.getElementById('signInButton').onclick = function(){
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
     });
-}
+})
