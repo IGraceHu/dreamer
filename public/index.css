@@ -59,6 +59,10 @@ body {
     width: 50px;
     border-radius: 100px;
 }
+#signOutButton {
+    border: solid;
+    border-radius:10px;
+}
 /****************************** DREAMS NOTE LIST ******************************/
 
 #dreams-list-container {
