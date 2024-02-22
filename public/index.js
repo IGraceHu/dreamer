@@ -5,11 +5,7 @@ import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/
 const dreams_list = document.getElementById("dreams-list");
 const dream_container = document.getElementById("dream-container");
 
-// console.log(auth.currentUser)
-// const userId = auth.currentUser.uid;
-
 onAuthStateChanged(auth, (user) => {
-    console.log("auth state changed")
     if (user) {
         generateDreams(user)
         loadUserImage(user)
@@ -24,7 +20,6 @@ onAuthStateChanged(auth, (user) => {
 
 async function loadUserImage(user){
     document.getElementById("userImage").src = user.photoURL
-    console.log(user)
 }
 async function generateDreams(userId){
 

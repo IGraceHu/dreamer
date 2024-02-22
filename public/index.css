@@ -27,11 +27,11 @@ body {
 /********************************** NAVBARS ***********************************/
 
 .navbar {
-    background-color: var(--main-color);
+    background: linear-gradient(to left,#b15eb2, var(--main-color));
 }
 
 .nav {
-    background-color: var(--main-color);
+    background: linear-gradient(var(--main-color),#b15eb2);
 }
 
 #main-side-nav {
