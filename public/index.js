@@ -13,7 +13,7 @@ onAuthStateChanged(auth, (user) => {
     } else {
       // Handle user not signed in
       console.log("Please sign in")
-      window.location.replace("./signIn.html")
+      window.location.replace("./signin.html")
 
     }
   });
@@ -73,7 +73,7 @@ function userSignOut(){
     signOut(auth).then(() => {
         // Sign-out successful.
         console.log("sign out complete")
-        window.location.replace("./signIn.html")
+        window.location.replace("./signin.html")
       }).catch((error) => {
         // An error happened.
         console.log("Sign out error: " + error)
