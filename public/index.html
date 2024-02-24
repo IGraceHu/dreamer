@@ -45,17 +45,16 @@
     <div id="dreams-list-container" class="col-4">
       <div id="dreams-top"><h1>Dreams<i class="bi-calendar-event" style="float: right;"></i></h1></div>
         <ul id="dreams-list" class="list-group">
-
+          <li id="new-dream" class="list-group-item"><i class="bi-plus"></i></li>
         </ul>
     </div>
     
     <!-------------------- CONTENT CONTAINER ---------------------------------->
     <div class="col-8">
-      <h1>Welcome to Dreamer</h1>
-      <a href="/public/journal.html">Click here to go to journal</a>
-
       <div id="firebaseui-auth-container"></div>
-      <div id="dream-container"></div>
+      <div id="dream-container">
+        <textarea id="dream-textarea" class="form-control"></textarea>
+      </div>
     </div>
   </div>
 

@@ -99,3 +99,29 @@ body {
     background-color: var(--border-color);
     cursor: pointer;
 }
+
+#dreams-list #new-dream {
+    height: auto;
+    padding: 0;
+    text-align: center;
+    font-size: 36px;
+    transition: all 0.2s;
+}
+
+#dreams-list #new-dream:hover {
+    padding: 10px;
+    color: var(--text-color);
+}
+
+
+/**************************** DREAMS WRITING PART *****************************/
+#dream-textarea {
+    border: none;
+    height: 100vh;
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+    border-color: rgba(229, 103, 23, 0.8);
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+    outline: 0 none;
+}
