@@ -109,6 +109,20 @@ async function newDream(userId) {
 
   newDream.addEventListener("click", function(){ getDream(dream.id, newDream); }); 
   dreams_list.insertBefore(newDream, dreams_list.children[1]);
+
+  // Animate it
+  let frameId = null;
+  let height = 0;
+  clearInterval(frameId);
+  frameId = setInterval(frame, 5);
+  function frame() {
+    if (height == 97) {
+      clearInterval(frameId);
+    } else {
+      height++; 
+      newDream.style.height = height + "px"; 
+    }
+  }
 }
 
 
