@@ -75,7 +75,7 @@ async function getDream(id, userId, dreamListItem) {
   const dreamRef = doc(db, "users/" + userId + "/dreams", id);
   const dream = await getDoc(dreamRef);
 
-  console.log(dream.data().dream)
+  console.log(dream.data().dream);
   if (dream.data() == null) {
     dream_textarea.value = "";
   }
