@@ -7,7 +7,6 @@ const q = query(collection(db, "dreams"), orderBy("timestamp", "desc"));
 
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
-//   console.log(doc.id, " => ", doc.data());
   const data = doc.data()
 
   const newDiv = document.createElement('div');
@@ -15,7 +14,7 @@ querySnapshot.forEach((doc) => {
 
     // Create the title element
     const title = document.createElement('h3');
-    title.textContent =formatDate(new Date(data.timestamp.seconds*1000)); 
+    title.textContent = formatDate(new Date(data.timestamp.seconds*1000)); 
 
     // Create the content element
     const content = document.createElement('div');

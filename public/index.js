@@ -1,41 +1,57 @@
-import { db } from './firebase-init.js';
-import { collection, getDocs, query, orderBy, doc, getDoc, updateDoc, addDoc, serverTimestamp  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
- 
+
+import { db, auth } from './firebase-init.js';
+import { collection, getDocs, query, orderBy, doc, getDoc, addDoc, updateDoc, serverTimestamp  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"
+
 const dreams_list = document.getElementById("dreams-list");
-const addDream = document.getElementById("new-dream");
-addDream.addEventListener("click", function(){ newDream(); }); 
 
-async function getDreamList() {
-    const q = query(collection(db, "dreams"), orderBy("timestamp", "desc"));
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        generateDreams(user)
+        loadUserImage(user)
+      // Use userId here
+    } else {
+      // Handle user not signed in
+      console.log("Please sign in")
+      window.location.replace("./signin.html")
 
+    }
+  });
+
+async function loadUserImage(user){
+    document.getElementById("userImage").src = user.photoURL
+}
+async function generateDreams(userId){
+    const addDream = document.getElementById("new-dream");
+    addDream.addEventListener("click", function(){ newDream(userId.uid); }); 
+
+    const q = query(collection(db, "users/" + userId.uid + '/dreams'), orderBy("timestamp", "desc"));
+    
     const querySnapshot = await getDocs(q);
-
+    
     querySnapshot.forEach((doc) => {
-        // console.log(doc);
+        // console.log(doc.id, " => ", doc.data());
         const data = doc.data()
-
+    
         const newDream = document.createElement('li')
         newDream.classList.add('list-group-item'); 
-        
+        newDream.addEventListener("click", function(){ getDream(doc.id, userId.uid, newDream); }); 
+    
         // Create the title element
         const title = document.createElement('h4');
         title.textContent = formatDate(new Date(data.timestamp.seconds*1000)); 
-
+    
         // Create the content element
         const content = document.createElement('div');
         content.textContent = data.dream; 
-
+    
         // Append the title and content to the new div
         newDream.appendChild(title);
         newDream.appendChild(content);
         // Append the new div to the target div
-
-        newDream.addEventListener("click", function(){ getDream(doc.id, newDream); }); 
         dreams_list.appendChild(newDream);
     });
 }
-
-getDreamList();
 
 function formatDate(date) {
     const day = date.getDate();
@@ -50,23 +66,30 @@ let currentDreamDocRef;
 let currentDreamListItem;
 const dream_textarea = document.getElementById("dream-textarea");
 
-async function getDream(id, dreamListItem) {
-    if (currentDreamDocRef != null) {
-        updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
-        currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
-    }
-    currentDreamListItem = dreamListItem;
-    currentDreamDocRef = doc(db, "dreams", id);
+async function getDream(id, userId, dreamListItem) {
+  if (currentDreamDocRef != null) {
+    updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
+    currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
+  }
+  
+  const dreamRef = doc(db, "users/" + userId + "/dreams", id);
+  const dream = await getDoc(dreamRef);
 
-    const dream = await getDoc(currentDreamDocRef);
+  console.log(dream.data().dream)
+  if (dream.data() == null) {
+    dream_textarea.value = "";
+  }
+  else { dream_textarea.value = dream.data().dream; }
 
-    dream_textarea.value = dream.data().dream;
-    return 0;
+  currentDreamListItem = dreamListItem;
+  currentDreamDocRef = dreamRef;
+
+  return 0;
 }
 
-async function newDream() {
-  const id = await addRecord("");
-  const dream = await getDoc(doc(db, "dreams", id));
+async function newDream(userId) {
+  const id = await addRecord(userId, "");
+  const dream = await getDoc(doc(db, "users/" + userId + "/dreams", id));
   console.log(dream);
 
   const newDream = document.createElement('li')
@@ -92,11 +115,11 @@ async function newDream() {
 // const dataInput = document.getElementById('data-input');
 // const writeButton = document.getElementById('write-button');
 
-async function addRecord(data) {
+async function addRecord(userId, data) {
     // const collectionRef = doc(db, '/dreams');
 
   try {
-    const docRef = await addDoc(collection(db, "dreams"), {
+    const docRef = await addDoc(collection(db, "users/" + userId + "/dreams" ), {
       dream: data,
       timestamp: serverTimestamp()
     });
@@ -108,7 +131,6 @@ async function addRecord(data) {
   
 };
 
-// writeButton.addEventListener('click', addRecord);
 
 async function updateRecord(dreamRef, data){
     try {
@@ -122,3 +144,16 @@ async function updateRecord(dreamRef, data){
     }
     
   };
+
+
+function userSignOut(){
+    signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log("sign out complete")
+        window.location.replace("./signin.html")
+      }).catch((error) => {
+        // An error happened.
+        console.log("Sign out error: " + error)
+      });
+}
+document.getElementById("signOutButton").addEventListener("click", userSignOut)
