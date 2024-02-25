@@ -80,11 +80,7 @@ async function getDream(id, userId, dreamListItem) {
   const dreamRef = doc(db, "users/" + userId + "/dreams", id);
   const dream = await getDoc(dreamRef);
 
-  console.log(dream.data().dream);
-  if (dream.data() == null) {
-    dream_textarea.value = "";
-  }
-  else { dream_textarea.value = dream.data().dream; }
+  dream_textarea.value = dream.data().dream;
 
   currentDreamListItem = dreamListItem;
   currentDreamDocRef = dreamRef;
@@ -113,8 +109,10 @@ async function newDream(userId) {
   newDream.appendChild(content);
   // Append the new div to the target div
 
-  newDream.addEventListener("click", function(){ getDream(dream.id, newDream); }); 
+  newDream.addEventListener("click", function(){ getDream(dream.id, userId, newDream); }); 
   dreams_list.insertBefore(newDream, dreams_list.children[1]);
+
+  getDream(dream.id, userId, newDream);
 
   // Animate it
   let frameId = null;
