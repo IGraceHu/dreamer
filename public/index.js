@@ -1,9 +1,10 @@
 
 import { db, auth } from './firebase-init.js';
-import { collection, getDocs, query, orderBy, doc, getDoc, addDoc, updateDoc, serverTimestamp  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
+import { collection, getDocs, query, orderBy, doc, getDoc, addDoc, updateDoc, deleteDoc, serverTimestamp  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"
 
 const dreams_list = document.getElementById("dreams-list");
+
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -66,7 +67,11 @@ let currentDreamDocRef;
 let currentDreamListItem;
 const dream_textarea = document.getElementById("dream-textarea");
 
+const del_dream = document.getElementById("del-dream");
+del_dream.addEventListener("click", function(){ delDream(); }); 
+
 async function getDream(id, userId, dreamListItem) {
+  // If navigating from another note
   if (currentDreamDocRef != null) {
     updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
     currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
@@ -83,6 +88,7 @@ async function getDream(id, userId, dreamListItem) {
 
   currentDreamListItem = dreamListItem;
   currentDreamDocRef = dreamRef;
+  console.log(currentDreamDocRef);
 
   return 0;
 }
@@ -125,6 +131,21 @@ async function newDream(userId) {
   }
 }
 
+async function delDream() {
+  console.log(currentDreamDocRef);
+  try {
+    const docRef = await deleteDoc(currentDreamDocRef);
+
+    currentDreamDocRef = null;
+    currentDreamListItem.remove();
+    dream_textarea.value = "";
+    console.log("Document removed");
+    return docRef.id;
+  } catch (e) {
+    console.error("Error removing document: ", e);
+  }
+  
+}
 
 // const dataInput = document.getElementById('data-input');
 // const writeButton = document.getElementById('write-button');
