@@ -5,6 +5,12 @@ import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/
 
 const dreams_list = document.getElementById("dreams-list");
 
+let currentDreamDocRef;
+let currentDreamListItem;
+const dream_textarea = document.getElementById("dream-textarea");
+
+const del_dream = document.getElementById("del-dream");
+del_dream.addEventListener("click", function(){ delDream(); }); 
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -22,6 +28,7 @@ onAuthStateChanged(auth, (user) => {
 async function loadUserImage(user){
     document.getElementById("userImage").src = user.photoURL
 }
+
 async function generateDreams(userId){
     const addDream = document.getElementById("new-dream");
     addDream.addEventListener("click", function(){ newDream(userId.uid); }); 
@@ -63,26 +70,22 @@ function formatDate(date) {
     return formattedDate;
 }
 
-let currentDreamDocRef;
-let currentDreamListItem;
-const dream_textarea = document.getElementById("dream-textarea");
-
-const del_dream = document.getElementById("del-dream");
-del_dream.addEventListener("click", function(){ delDream(); }); 
-
 async function getDream(id, userId, dreamListItem) {
-  // If navigating from another note
+  // If navigating from another note, update content
   if (currentDreamDocRef != null) {
     updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
     currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
+    currentDreamListItem.classList.remove("dream-active");
   }
+
+  currentDreamListItem = dreamListItem;
+  currentDreamListItem.classList.add("dream-active");
   
   const dreamRef = doc(db, "users/" + userId + "/dreams", id);
   const dream = await getDoc(dreamRef);
 
   dream_textarea.value = dream.data().dream;
 
-  currentDreamListItem = dreamListItem;
   currentDreamDocRef = dreamRef;
   console.log(currentDreamDocRef);
 
@@ -130,15 +133,15 @@ async function newDream(userId) {
 }
 
 async function delDream() {
+  console.log("Del");
   console.log(currentDreamDocRef);
   try {
-    const docRef = await deleteDoc(currentDreamDocRef);
+    await deleteDoc(currentDreamDocRef);
 
     currentDreamDocRef = null;
     currentDreamListItem.remove();
     dream_textarea.value = "";
     console.log("Document removed");
-    return docRef.id;
   } catch (e) {
     console.error("Error removing document: ", e);
   }

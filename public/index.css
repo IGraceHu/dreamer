@@ -97,6 +97,19 @@ body {
     cursor: pointer;
 }
 
+#dreams-list .dream-active {
+    background-color: var(--secondary-accent-color);
+    color: var(--text-dark-color);
+}
+
+#dreams-list .dream-active:hover {
+    background-color: var(--secondary-accent-color);
+}
+
+#dreams-list .dream-active h4 {
+    color: var(--text-dark-color);
+}
+
 #dreams-list #new-dream {
     height: auto;
     padding: 0;
