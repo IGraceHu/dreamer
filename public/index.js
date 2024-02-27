@@ -7,7 +7,7 @@ const dreams_list = document.getElementById("dreams-list");
 
 let currentDreamDocRef;
 let currentDreamListItem;
-const dream_textarea = document.getElementById("dream-textarea");
+const dream_textarea_container = document.getElementById("dream-textarea-container");
 
 const del_dream = document.getElementById("del-dream");
 del_dream.addEventListener("click", function(){ delDream(); }); 
@@ -71,20 +71,22 @@ function formatDate(date) {
 }
 
 async function getDream(id, userId, dreamListItem) {
+  const dreamRef = doc(db, "users/" + userId + "/dreams", id);
+  const dream = await getDoc(dreamRef);
+
   // If navigating from another note, update content
   if (currentDreamDocRef != null) {
     updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
     currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
     currentDreamListItem.classList.remove("dream-active");
-  }
 
+    dream_textarea_container.innerHTML = null;
+  }
   currentDreamListItem = dreamListItem;
   currentDreamListItem.classList.add("dream-active");
   
-  const dreamRef = doc(db, "users/" + userId + "/dreams", id);
-  const dream = await getDoc(dreamRef);
-
-  dream_textarea.value = dream.data().dream;
+  dream_textarea_container.innerHTML = '<textarea id="dream-textarea" class="form-control"></textarea>';
+  document.getElementById("dream-textarea").value = dream.data().dream;
 
   currentDreamDocRef = dreamRef;
   console.log(currentDreamDocRef);
