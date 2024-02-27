@@ -10,12 +10,13 @@ let currentDreamListItem;
 const dream_textarea_container = document.getElementById("dream-textarea-container");
 
 const del_dream = document.getElementById("del-dream");
-del_dream.addEventListener("click", function(){ delDream(); }); 
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
         generateDreams(user)
         loadUserImage(user)
+        del_dream.addEventListener("click", function(){ delDream(user); }); 
+
       // Use userId here
     } else {
       // Handle user not signed in
@@ -89,7 +90,9 @@ async function getDream(id, userId, dreamListItem) {
   document.getElementById("dream-textarea").value = dream.data().dream;
 
   currentDreamDocRef = dreamRef;
+  console.log(`Get Dream: ${currentDreamDocRef}`);
   console.log(currentDreamDocRef);
+  console.log(dream);
 
   return 0;
 }
@@ -134,11 +137,13 @@ async function newDream(userId) {
   }
 }
 
-async function delDream() {
-  console.log("Del");
-  console.log(currentDreamDocRef);
+async function delDream(userId) {
+  console.log(`Deleting ${currentDreamDocRef}`);
+  const dream = await getDoc(currentDreamDocRef);
+  console.log("A");
+  console.log(dream.id);
   try {
-    await deleteDoc(currentDreamDocRef);
+    console.log(await deleteDoc(currentDreamDocRef));
 
     currentDreamDocRef = null;
     currentDreamListItem.remove();
