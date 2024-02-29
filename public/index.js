@@ -229,8 +229,8 @@ function userSignOut(){
 document.getElementById("signOutButton").addEventListener("click", userSignOut)
 
 async function openStoryPopup() {
-  document.getElementById("storyPopup").style.display = "block";
-  document.getElementById("storyPopupText").textContent = "loading"
+  document.getElementById("story-popup").style.display = "block";
+  document.getElementById("story-popup-content").textContent = "loading"
 
   const dream = await getDoc(currentDreamDocRef);
 
@@ -249,14 +249,14 @@ async function openStoryPopup() {
 
   fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/story", requestOptions)
     .then(response => response.text())
-    .then(response => document.getElementById("storyPopupText").innerHTML = boldText(response))
+    .then(response => document.getElementById("story-popup-content").innerHTML = boldText(response))
     .catch(error => console.log('error', error));
   }
 
 
 async function openInterpretationPopup() {
-  document.getElementById("interpretationPopup").style.display = "block";
-  document.getElementById("interpretationPopupText").textContent = "loading"
+  document.getElementById("interpretation-popup").style.display = "block";
+  document.getElementById("interpretation-popup-content").textContent = "loading"
 
   const dream = await getDoc(currentDreamDocRef);
 
@@ -275,7 +275,7 @@ async function openInterpretationPopup() {
 
   fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/interpret", requestOptions)
     .then(response => response.text())
-    .then(response => document.getElementById("interpretationPopupText").innerHTML = boldText(response))
+    .then(response => document.getElementById("interpretation-popup-content").innerHTML = boldText(response))
     .catch(error => console.log('error', error));
   }
 

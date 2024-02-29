@@ -71,19 +71,23 @@
 
       <div id="dream-body">
 
-        <div id="interpretationPopup" class="popup">
-          <div class="popupContent">
-            <span class="popup-close" onclick="closePopups()">&times;</span>
-            <h2>Your Interpretations</h2>
-            <p id="interpretationPopupText">default text</p>
-          </div>
+        <div id="interpretation-popup" class="popup-container">
+          <div class="card popup-card">
+            <div class="card-body">
+              <button type="button" class="btn-close" aria-label="Close" onclick="closePopups()"></button>
+              <h2 class="card-title">Your Interpretations</h2>
+              <p id="interpretation-popup-content" class="card-text">default text</p>
+            </div>
         </div>
-        
-        <div id="storyPopup" class="popup">
-          <div class="popupContent">
-            <span class="popup-close" onclick="closePopups()">&times;</span>
-            <h2>Your Story</h2>
-            <p id="storyPopupText">default text</p>
+        </div>
+
+        <div id="story-popup" class="popup-container">
+          <div class="card popup-card">
+            <div class="card-body">
+              <button type="button" class="btn-close" aria-label="Close" onclick="closePopups()"></button>
+              <h2 class="card-title">Your Story</h2>
+              <p id="story-popup-content" class="card-text">default text</p>
+            </div>
           </div>
         </div>
 
@@ -103,5 +107,12 @@
   </div>
 
 </body>
+
+<script>
+  function closePopups(){
+      document.getElementById("interpretation-popup").style.display = "none";
+      document.getElementById("story-popup").style.display = "none";
+    }
+</script>
 
 </html>
