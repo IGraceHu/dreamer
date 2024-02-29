@@ -184,9 +184,6 @@ async function delDream() {
   
 }
 
-// const dataInput = document.getElementById('data-input');
-// const writeButton = document.getElementById('write-button');
-
 async function addRecord(userId, data) {
     // const collectionRef = doc(db, '/dreams');
 
@@ -228,17 +225,20 @@ function userSignOut(){
         console.log("Sign out error: " + error)
       });
 }
+
 document.getElementById("signOutButton").addEventListener("click", userSignOut)
 
-function openStoryPopup(dream){
+async function openStoryPopup() {
   document.getElementById("storyPopup").style.display = "block";
   document.getElementById("storyPopupText").textContent = "loading"
+
+  const dream = await getDoc(currentDreamDocRef);
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    "dream": dream
+    "dream": dream.data().dream
   });
 
   var requestOptions = {
@@ -254,15 +254,17 @@ function openStoryPopup(dream){
   }
 
 
-function openInterpretationPopup(dream){
+async function openInterpretationPopup() {
   document.getElementById("interpretationPopup").style.display = "block";
   document.getElementById("interpretationPopupText").textContent = "loading"
+
+  const dream = await getDoc(currentDreamDocRef);
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    "dream": dream
+    "dream": dream.data().dream
   });
 
   var requestOptions = {
