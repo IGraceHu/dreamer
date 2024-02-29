@@ -11,3 +11,59 @@
     display:flex;
     flex-direction: column;
 }
+
+.mindmap-element {
+    border: solid;
+    border-radius: 10px;
+    padding:10px;
+    max-width: 250px;
+}
+p {
+    text-align: justify;
+    hyphens: auto;
+}
+.selection-dot {
+    cursor: move;
+    position: absolute; /* Position the dot relative to the main div */
+ 
+    /* transform: translateX(-50%); Adjust horizontal centering for specific width */
+    width: 10px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    border-radius: 50%; /* Make it a circle */
+    background-color: black;
+
+}
+
+.top{
+    top: -5px; /* Place it at the top */
+    left: 47%; /* Center it horizontally */
+}
+.right{
+    top: 45px; /* Place it at the top */
+    right: -4%; /* Center it horizontally */
+}
+.bottom{
+    bottom: -5px; /* Place it at the top */
+    left: 47%; /* Center it horizontally */
+}
+.left{
+    top:45px;
+    left: -4%;
+}
+
+.header-container{
+    display:flex;
+    justify-content: space-between;
+
+}
+
+.close-button{
+    margin-left: auto;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: solid;
+    border-width: 1px;
+    border-radius: 100px;
+    margin-left: 10px;
+}
