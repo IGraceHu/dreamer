@@ -23,6 +23,9 @@ body {
     width: 10px;
 }
 
+.invisible {
+    visibility: none !important; 
+}
 
 /********************************** NAVBARS ***********************************/
 
@@ -75,7 +78,7 @@ body {
     top: 0;
     background-color: var(--background-color);
     padding: 10px 0;
-    z-index: 99;
+    z-index: 1;
 }
 
 #dreams-list {
@@ -137,13 +140,61 @@ body {
     color: var(--text-hover-color);
 }
 
-#dream-textarea {
+#dream-body {
     border: none;
     height: 100vh;
 }
 
-textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
-    border-color: rgba(229, 103, 23, 0.8);
-    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
-    outline: 0 none;
+#dream-functions {
+    position: fixed;
+    bottom: 0px;
+    right: 20px;
+}
+
+#dream-functions .btn {
+    display: block;
+    margin-bottom: 10px;
+    background-color: var(--primary-accent-color);
+    border-color: var(--primary-accent-color);
+}
+
+#dream-functions .btn:hover {
+    background-color: var(--secondary-accent-color);
+    border-color: var(--secondary-accent-color);
+}
+
+#dream-textarea {
+    height: 100vh;
+}
+
+
+/****************************** FUNCTION POPUPS *******************************/
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 2; /* Make sure the popup is on top of everything else */
+}
+
+.popup-card {
+    position: absolute;
+    width: 75vw;
+    max-height: 90vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-y: scroll;
+}
+
+.popup-card .btn-close {
+    float: right;
 }

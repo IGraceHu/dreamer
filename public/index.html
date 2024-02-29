@@ -53,6 +53,7 @@
     
     <!-------------------- CONTENT CONTAINER ---------------------------------->
     <div id="dream-container" class="col-8">
+
       <nav id="dream-text-nav" class="navbar navbar-expand">
         <div class="container-fluid">
 
@@ -68,10 +69,50 @@
         </div>
       </nav>
 
-      <div id="dream-textarea-container"></div>
+      <div id="dream-body">
+
+        <div id="interpretation-popup" class="popup-container">
+          <div class="card popup-card">
+            <div class="card-body">
+              <button type="button" class="btn-close" aria-label="Close" onclick="closePopups()"></button>
+              <h2 class="card-title">Your Interpretations</h2>
+              <p id="interpretation-popup-content" class="card-text">default text</p>
+            </div>
+        </div>
+        </div>
+
+        <div id="story-popup" class="popup-container">
+          <div class="card popup-card">
+            <div class="card-body">
+              <button type="button" class="btn-close" aria-label="Close" onclick="closePopups()"></button>
+              <h2 class="card-title">Your Story</h2>
+              <p id="story-popup-content" class="card-text">default text</p>
+            </div>
+          </div>
+        </div>
+
+        <ul id="dream-functions">
+          <li id="interpret-button" type="button" class="btn btn-primary">
+            <i class="bi-book-half"></i>
+            Interpret
+          </li>
+          <li id="analyze-button" type="button" class="btn btn-primary">
+            <i class="bi-search-heart"></i>
+            Analyze
+          </li>
+        </ul>
+        <div id="dream-textarea-container"></div>
+      </div>
     </div>
   </div>
 
 </body>
+
+<script>
+  function closePopups(){
+      document.getElementById("interpretation-popup").style.display = "none";
+      document.getElementById("story-popup").style.display = "none";
+    }
+</script>
 
 </html>

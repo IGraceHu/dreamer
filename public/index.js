@@ -9,13 +9,16 @@ let currentDreamDocRef;
 let currentDreamListItem;
 const dream_textarea_container = document.getElementById("dream-textarea-container");
 
-const del_dream = document.getElementById("del-dream");
+const dream_hotbar = document.getElementById("dream-text-nav");
+const dream_functions = document.getElementById("dream-functions");
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
         generateDreams(user)
         loadUserImage(user)
-        del_dream.addEventListener("click", function(){ delDream(user); }); 
+        document.getElementById("del-dream").addEventListener("click", ()=>delDream()); 
+        document.getElementById("analyze-button").addEventListener("click", ()=>openStoryPopup());
+        document.getElementById("interpret-button").addEventListener("click", ()=>openInterpretationPopup());  
 
       // Use userId here
     } else {
@@ -31,6 +34,7 @@ async function loadUserImage(user){
 }
 
 async function generateDreams(userId){
+    updateDreamBody();
     const addDream = document.getElementById("new-dream");
     addDream.addEventListener("click", function(){ newDream(userId.uid); }); 
 
@@ -72,6 +76,7 @@ function formatDate(date) {
 }
 
 async function getDream(id, userId, dreamListItem) {
+  
   const dreamRef = doc(db, "users/" + userId + "/dreams", id);
   const dream = await getDoc(dreamRef);
 
@@ -90,11 +95,19 @@ async function getDream(id, userId, dreamListItem) {
   document.getElementById("dream-textarea").value = dream.data().dream;
 
   currentDreamDocRef = dreamRef;
-  console.log(`Get Dream: ${currentDreamDocRef}`);
-  console.log(currentDreamDocRef);
-  console.log(dream);
 
+  updateDreamBody();
   return 0;
+}
+
+function updateDreamBody() {
+  if (currentDreamDocRef == null) {
+    dream_hotbar.classList.add("invisible");
+    dream_functions.classList.add("invisible");
+  } else {
+    dream_hotbar.classList.remove("invisible");
+    dream_functions.classList.remove("invisible");
+  }
 }
 
 async function newDream(userId) {
@@ -121,6 +134,7 @@ async function newDream(userId) {
   dreams_list.insertBefore(newDream, dreams_list.children[1]);
 
   getDream(dream.id, userId, newDream);
+  updateDreamBody();
 
   // Animate it
   let frameId = null;
@@ -137,8 +151,7 @@ async function newDream(userId) {
   }
 }
 
-async function delDream(userId) {
-
+async function delDream() {
   // Animate it
   let frameId = null;
   let height = 97;
@@ -150,6 +163,7 @@ async function delDream(userId) {
     } else {
       height--; 
       currentDreamListItem.style.height = height + "px"; 
+      console.log(height);
     }
   }
 
@@ -160,6 +174,8 @@ async function delDream(userId) {
 
     currentDreamDocRef = null;
     currentDreamListItem.remove();
+
+    updateDreamBody();
     
     console.log("Document removed");
   } catch (e) {
@@ -167,9 +183,6 @@ async function delDream(userId) {
   }
   
 }
-
-// const dataInput = document.getElementById('data-input');
-// const writeButton = document.getElementById('write-button');
 
 async function addRecord(userId, data) {
     // const collectionRef = doc(db, '/dreams');
@@ -212,4 +225,60 @@ function userSignOut(){
         console.log("Sign out error: " + error)
       });
 }
+
 document.getElementById("signOutButton").addEventListener("click", userSignOut)
+
+async function openStoryPopup() {
+  document.getElementById("story-popup").style.display = "block";
+  document.getElementById("story-popup-content").textContent = "loading"
+
+  const dream = await getDoc(currentDreamDocRef);
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "dream": dream.data().dream
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'  };
+
+  fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/story", requestOptions)
+    .then(response => response.text())
+    .then(response => document.getElementById("story-popup-content").innerHTML = boldText(response))
+    .catch(error => console.log('error', error));
+  }
+
+
+async function openInterpretationPopup() {
+  document.getElementById("interpretation-popup").style.display = "block";
+  document.getElementById("interpretation-popup-content").textContent = "loading"
+
+  const dream = await getDoc(currentDreamDocRef);
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "dream": dream.data().dream
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'  };
+
+  fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/interpret", requestOptions)
+    .then(response => response.text())
+    .then(response => document.getElementById("interpretation-popup-content").innerHTML = boldText(response))
+    .catch(error => console.log('error', error));
+  }
+
+  function boldText(text) {
+    return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  }
