@@ -72,6 +72,7 @@ function formatDate(date) {
 }
 
 async function getDream(id, userId, dreamListItem) {
+  
   const dreamRef = doc(db, "users/" + userId + "/dreams", id);
   const dream = await getDoc(dreamRef);
 
@@ -213,3 +214,54 @@ function userSignOut(){
       });
 }
 document.getElementById("signOutButton").addEventListener("click", userSignOut)
+
+function openStoryPopup(dream){
+  document.getElementById("storyPopup").style.display = "block";
+  document.getElementById("storyPopupText").textContent = "loading"
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "dream": dream
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'  };
+
+  fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/story", requestOptions)
+    .then(response => response.text())
+    .then(response => document.getElementById("storyPopupText").innerHTML = boldText(response))
+    .catch(error => console.log('error', error));
+  }
+
+
+function openInterpretationPopup(dream){
+  document.getElementById("interpretationPopup").style.display = "block";
+  document.getElementById("interpretationPopupText").textContent = "loading"
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "dream": dream
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'  };
+
+  fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/interpret", requestOptions)
+    .then(response => response.text())
+    .then(response => document.getElementById("interpretationPopupText").innerHTML = boldText(response))
+    .catch(error => console.log('error', error));
+  }
+
+  function boldText(text) {
+    return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  }

@@ -23,6 +23,9 @@ body {
     width: 10px;
 }
 
+.invisible {
+    visibility: none !important; 
+}
 
 /********************************** NAVBARS ***********************************/
 
@@ -134,9 +137,27 @@ body {
     color: var(--text-hover-color);
 }
 
-#dream-textarea {
+#dream-body {
     border: none;
     height: 100vh;
+}
+
+#dream-functions {
+    position: fixed;
+    bottom: 0px;
+    right: 20px;
+}
+
+#dream-functions .btn {
+    display: block;
+    margin-bottom: 10px;
+    background-color: var(--primary-accent-color);
+    border-color: var(--primary-accent-color);
+}
+
+#dream-functions .btn:hover {
+    background-color: var(--secondary-accent-color);
+    border-color: var(--secondary-accent-color);
 }
 
 textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
