@@ -138,16 +138,29 @@ async function newDream(userId) {
 }
 
 async function delDream(userId) {
-  console.log(`Deleting ${currentDreamDocRef}`);
-  // const dream = await getDoc(currentDreamDocRef);
-  // console.log(dream.id);
-  // 
+
+  // Animate it
+  let frameId = null;
+  let height = 97;
+  clearInterval(frameId);
+  frameId = setInterval(frame, 5);
+  function frame() {
+    if (height == 0) {
+      clearInterval(frameId);
+    } else {
+      height--; 
+      currentDreamListItem.style.height = height + "px"; 
+    }
+  }
+
+  dream_textarea_container.innerHTML = "";
+
   try {
-    console.log(await deleteDoc(currentDreamDocRef));
+    await deleteDoc(currentDreamDocRef);
 
     currentDreamDocRef = null;
     currentDreamListItem.remove();
-    dream_textarea_container.innerHTML = "";
+    
     console.log("Document removed");
   } catch (e) {
     console.error("Error removing document: ", e);
