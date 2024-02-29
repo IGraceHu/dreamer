@@ -139,15 +139,15 @@ async function newDream(userId) {
 
 async function delDream(userId) {
   console.log(`Deleting ${currentDreamDocRef}`);
-  const dream = await getDoc(currentDreamDocRef);
-  console.log("A");
-  console.log(dream.id);
+  // const dream = await getDoc(currentDreamDocRef);
+  // console.log(dream.id);
+  // 
   try {
     console.log(await deleteDoc(currentDreamDocRef));
 
     currentDreamDocRef = null;
     currentDreamListItem.remove();
-    dream_textarea.value = "";
+    dream_textarea_container.innerHTML = "";
     console.log("Document removed");
   } catch (e) {
     console.error("Error removing document: ", e);

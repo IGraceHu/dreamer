@@ -129,6 +129,11 @@ body {
     border-bottom: solid 2px var(--border-color);
 }
 
+#del-dream:hover {
+    cursor: pointer;
+    color: var(--text-hover-color);
+}
+
 #dream-textarea {
     border: none;
     height: 100vh;
