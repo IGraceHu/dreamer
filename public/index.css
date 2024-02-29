@@ -83,11 +83,14 @@ body {
 }
 
 #dreams-list .list-group-item {
+    user-select: all;
     height: 97px;
     overflow: hidden;
     color: var(--text-accent-color);
 }
-
+.list-group-item *{
+   
+}
 #dreams-list .list-group-item h4 {
     color: var(--text-color);
 }
