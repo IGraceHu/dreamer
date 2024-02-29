@@ -1,14 +1,22 @@
 
 import { db, auth } from './firebase-init.js';
-import { collection, getDocs, query, orderBy, doc, getDoc, addDoc, updateDoc, serverTimestamp  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
+import { collection, getDocs, query, orderBy, doc, getDoc, addDoc, updateDoc, deleteDoc, serverTimestamp  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"
 
 const dreams_list = document.getElementById("dreams-list");
+
+let currentDreamDocRef;
+let currentDreamListItem;
+const dream_textarea_container = document.getElementById("dream-textarea-container");
+
+const del_dream = document.getElementById("del-dream");
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
         generateDreams(user)
         loadUserImage(user)
+        del_dream.addEventListener("click", function(){ delDream(user); }); 
+
       // Use userId here
     } else {
       // Handle user not signed in
@@ -21,6 +29,7 @@ onAuthStateChanged(auth, (user) => {
 async function loadUserImage(user){
     document.getElementById("userImage").src = user.photoURL
 }
+
 async function generateDreams(userId){
     const addDream = document.getElementById("new-dream");
     addDream.addEventListener("click", function(){ newDream(userId.uid); }); 
@@ -62,27 +71,28 @@ function formatDate(date) {
     return formattedDate;
 }
 
-let currentDreamDocRef;
-let currentDreamListItem;
-const dream_textarea = document.getElementById("dream-textarea");
-
 async function getDream(id, userId, dreamListItem) {
-  if (currentDreamDocRef != null) {
-    updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
-    currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
-  }
-  
   const dreamRef = doc(db, "users/" + userId + "/dreams", id);
   const dream = await getDoc(dreamRef);
 
-  console.log(dream.data().dream);
-  if (dream.data() == null) {
-    dream_textarea.value = "";
-  }
-  else { dream_textarea.value = dream.data().dream; }
+  // If navigating from another note, update content
+  if (currentDreamDocRef != null) {
+    updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
+    currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
+    currentDreamListItem.classList.remove("dream-active");
 
+    dream_textarea_container.innerHTML = null;
+  }
   currentDreamListItem = dreamListItem;
+  currentDreamListItem.classList.add("dream-active");
+  
+  dream_textarea_container.innerHTML = '<textarea id="dream-textarea" class="form-control"></textarea>';
+  document.getElementById("dream-textarea").value = dream.data().dream;
+
   currentDreamDocRef = dreamRef;
+  console.log(`Get Dream: ${currentDreamDocRef}`);
+  console.log(currentDreamDocRef);
+  console.log(dream);
 
   return 0;
 }
@@ -107,8 +117,10 @@ async function newDream(userId) {
   newDream.appendChild(content);
   // Append the new div to the target div
 
-  newDream.addEventListener("click", function(){ getDream(dream.id, newDream); }); 
+  newDream.addEventListener("click", function(){ getDream(dream.id, userId, newDream); }); 
   dreams_list.insertBefore(newDream, dreams_list.children[1]);
+
+  getDream(dream.id, userId, newDream);
 
   // Animate it
   let frameId = null;
@@ -125,6 +137,36 @@ async function newDream(userId) {
   }
 }
 
+async function delDream(userId) {
+
+  // Animate it
+  let frameId = null;
+  let height = 97;
+  clearInterval(frameId);
+  frameId = setInterval(frame, 5);
+  function frame() {
+    if (height == 0) {
+      clearInterval(frameId);
+    } else {
+      height--; 
+      currentDreamListItem.style.height = height + "px"; 
+    }
+  }
+
+  dream_textarea_container.innerHTML = "";
+
+  try {
+    await deleteDoc(currentDreamDocRef);
+
+    currentDreamDocRef = null;
+    currentDreamListItem.remove();
+    
+    console.log("Document removed");
+  } catch (e) {
+    console.error("Error removing document: ", e);
+  }
+  
+}
 
 // const dataInput = document.getElementById('data-input');
 // const writeButton = document.getElementById('write-button');
