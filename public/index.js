@@ -9,13 +9,16 @@ let currentDreamDocRef;
 let currentDreamListItem;
 const dream_textarea_container = document.getElementById("dream-textarea-container");
 
-const del_dream = document.getElementById("del-dream");
+const dream_hotbar = document.getElementById("dream-text-nav");
+const dream_functions = document.getElementById("dream-functions");
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
         generateDreams(user)
         loadUserImage(user)
-        del_dream.addEventListener("click", function(){ delDream(user); }); 
+        document.getElementById("del-dream").addEventListener("click", ()=>delDream()); 
+        document.getElementById("analyze-button").addEventListener("click", ()=>openStoryPopup());
+        document.getElementById("interpret-button").addEventListener("click", ()=>openInterpretationPopup());  
 
       // Use userId here
     } else {
@@ -31,6 +34,7 @@ async function loadUserImage(user){
 }
 
 async function generateDreams(userId){
+    updateDreamBody();
     const addDream = document.getElementById("new-dream");
     addDream.addEventListener("click", function(){ newDream(userId.uid); }); 
 
@@ -91,11 +95,19 @@ async function getDream(id, userId, dreamListItem) {
   document.getElementById("dream-textarea").value = dream.data().dream;
 
   currentDreamDocRef = dreamRef;
-  console.log(`Get Dream: ${currentDreamDocRef}`);
-  console.log(currentDreamDocRef);
-  console.log(dream);
 
+  updateDreamBody();
   return 0;
+}
+
+function updateDreamBody() {
+  if (currentDreamDocRef == null) {
+    dream_hotbar.classList.add("invisible");
+    dream_functions.classList.add("invisible");
+  } else {
+    dream_hotbar.classList.remove("invisible");
+    dream_functions.classList.remove("invisible");
+  }
 }
 
 async function newDream(userId) {
@@ -122,6 +134,7 @@ async function newDream(userId) {
   dreams_list.insertBefore(newDream, dreams_list.children[1]);
 
   getDream(dream.id, userId, newDream);
+  updateDreamBody();
 
   // Animate it
   let frameId = null;
@@ -138,8 +151,7 @@ async function newDream(userId) {
   }
 }
 
-async function delDream(userId) {
-
+async function delDream() {
   // Animate it
   let frameId = null;
   let height = 97;
@@ -151,6 +163,7 @@ async function delDream(userId) {
     } else {
       height--; 
       currentDreamListItem.style.height = height + "px"; 
+      console.log(height);
     }
   }
 
@@ -161,6 +174,8 @@ async function delDream(userId) {
 
     currentDreamDocRef = null;
     currentDreamListItem.remove();
+
+    updateDreamBody();
     
     console.log("Document removed");
   } catch (e) {
