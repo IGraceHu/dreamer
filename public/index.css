@@ -60,8 +60,14 @@ body {
     border-radius: 100px;
 }
 #signOutButton {
-    border: solid;
-    border-radius:10px;
+    border: solid mintcream;        /* background color */
+    border-radius: 100px;
+    margin-left: auto;
+    margin-right: 20px;
+    font-size: large;
+    font-weight: bold;
+    padding: 5px 10px;
+    color: #7a027a;
 }
 /****************************** DREAMS NOTE LIST ******************************/
 
