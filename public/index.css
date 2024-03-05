@@ -66,7 +66,7 @@ body {
 /****************************** DREAMS NOTE LIST ******************************/
 
 #dreams-list-container {
-    /* width: 300px; */
+    width: 300px;
     height: calc(100vh - 55px);
     padding: 0 10px;
     border-right: solid 2px var(--border-color);
@@ -131,6 +131,10 @@ body {
 
 
 /**************************** DREAMS WRITING PART *****************************/
+#dream-container {
+    width: calc(100vw - 375px);
+}
+
 #dream-text-nav {
     border-bottom: solid 2px var(--border-color);
 }

@@ -48,7 +48,7 @@ async function generateDreams(userId){
     
         const newDream = document.createElement('li')
         newDream.classList.add('list-group-item'); 
-        newDream.addEventListener("click", function(){ getDream(doc.id, userId.uid, newDream); }); 
+        newDream.addEventListener("click", ()=>getDream(doc.id, userId.uid, newDream)); 
     
         // Create the title element
         const title = document.createElement('h4');
