@@ -86,7 +86,6 @@ body {
 }
 
 #dreams-list .list-group-item {
-    user-select: all;
     height: 97px;
     overflow: hidden;
     color: var(--text-accent-color);
