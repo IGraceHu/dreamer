@@ -90,10 +90,9 @@ body {
     height: 97px;
     overflow: hidden;
     color: var(--text-accent-color);
+    transition: all 0.2s;
 }
-.list-group-item *{
-   
-}
+
 #dreams-list .list-group-item h4 {
     color: var(--text-color);
 }

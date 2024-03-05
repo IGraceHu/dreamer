@@ -131,6 +131,7 @@ async function newDream(userId) {
   // Append the new div to the target div
 
   newDream.addEventListener("click", function(){ getDream(dream.id, userId, newDream); }); 
+  newDream.style.height = "0px"; 
   dreams_list.insertBefore(newDream, dreams_list.children[1]);
 
   getDream(dream.id, userId, newDream);
@@ -153,19 +154,7 @@ async function newDream(userId) {
 
 async function delDream() {
   // Animate it
-  let frameId = null;
-  let height = 97;
-  clearInterval(frameId);
-  frameId = setInterval(frame, 5);
-  function frame() {
-    if (height == 0) {
-      clearInterval(frameId);
-    } else {
-      height--; 
-      currentDreamListItem.style.height = height + "px"; 
-      console.log(height);
-    }
-  }
+  currentDreamListItem.style.height = "0px"; 
 
   dream_textarea_container.innerHTML = "";
 
