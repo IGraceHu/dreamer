@@ -66,7 +66,7 @@ body {
 /****************************** DREAMS NOTE LIST ******************************/
 
 #dreams-list-container {
-    width: 300px;
+    /* width: 300px; */
     height: calc(100vh - 55px);
     padding: 0 10px;
     border-right: solid 2px var(--border-color);
@@ -142,7 +142,8 @@ body {
 
 #dream-body {
     border: none;
-    height: 100vh;
+    height: auto;
+    width: auto;
 }
 
 #dream-functions {
@@ -164,7 +165,9 @@ body {
 }
 
 #dream-textarea {
-    height: 100vh;
+    height: calc(100vh - 130px);
+    width: 100%;
+
 }
 
 
