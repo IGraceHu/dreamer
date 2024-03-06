@@ -223,7 +223,7 @@ async function openStoryPopup() {
   currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
 
   document.getElementById("story-popup").style.display = "block";
-  document.getElementById("story-popup-content").textContent = "loading"
+  // document.getElementById("story-popup-content").textContent = "loading"
 
   const dream = await getDoc(currentDreamDocRef);
 
@@ -252,7 +252,7 @@ async function openInterpretationPopup() {
   currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
 
   document.getElementById("interpretation-popup").style.display = "block";
-  document.getElementById("interpretation-popup-content").textContent = "loading"
+  // document.getElementById("interpretation-popup-content").textContent = "loading"
 
   const dream = await getDoc(currentDreamDocRef);
 
