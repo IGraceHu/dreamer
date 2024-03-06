@@ -67,3 +67,8 @@ p {
     border-radius: 100px;
     margin-left: 10px;
 }
+
+
+#dreams-list .list-group-item {
+    user-select: all;
+}
