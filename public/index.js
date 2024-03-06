@@ -219,6 +219,9 @@ function userSignOut(){
 document.getElementById("signOutButton").addEventListener("click", userSignOut)
 
 async function openStoryPopup() {
+  updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
+  currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
+
   document.getElementById("story-popup").style.display = "block";
   document.getElementById("story-popup-content").textContent = "loading"
 
@@ -245,6 +248,9 @@ async function openStoryPopup() {
 
 
 async function openInterpretationPopup() {
+  updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
+  currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
+
   document.getElementById("interpretation-popup").style.display = "block";
   document.getElementById("interpretation-popup-content").textContent = "loading"
 
