@@ -48,7 +48,7 @@ async function generateDreams(userId){
     
         const newDream = document.createElement('li')
         newDream.classList.add('list-group-item'); 
-        newDream.addEventListener("click", function(){ getDream(doc.id, userId.uid, newDream); }); 
+        newDream.addEventListener("click", ()=>getDream(doc.id, userId.uid, newDream)); 
     
         // Create the title element
         const title = document.createElement('h4');
@@ -93,6 +93,7 @@ async function getDream(id, userId, dreamListItem) {
   
   dream_textarea_container.innerHTML = '<textarea id="dream-textarea" class="form-control"></textarea>';
   document.getElementById("dream-textarea").value = dream.data().dream;
+  document.getElementById("dream-title").textContent = formatDate(new Date(dream.data().timestamp.seconds*1000));
 
   currentDreamDocRef = dreamRef;
 
@@ -121,7 +122,7 @@ async function newDream(userId) {
   // Create the title element
   const title = document.createElement('h4');
   title.textContent = formatDate(new Date(dream.data().timestamp.seconds*1000)); 
-
+  
   // Create the content element
   const content = document.createElement('div');
 
@@ -131,6 +132,7 @@ async function newDream(userId) {
   // Append the new div to the target div
 
   newDream.addEventListener("click", function(){ getDream(dream.id, userId, newDream); }); 
+  newDream.style.height = "0px"; 
   dreams_list.insertBefore(newDream, dreams_list.children[1]);
 
   getDream(dream.id, userId, newDream);
@@ -153,19 +155,7 @@ async function newDream(userId) {
 
 async function delDream() {
   // Animate it
-  let frameId = null;
-  let height = 97;
-  clearInterval(frameId);
-  frameId = setInterval(frame, 5);
-  function frame() {
-    if (height == 0) {
-      clearInterval(frameId);
-    } else {
-      height--; 
-      currentDreamListItem.style.height = height + "px"; 
-      console.log(height);
-    }
-  }
+  currentDreamListItem.style.height = "0px"; 
 
   dream_textarea_container.innerHTML = "";
 
@@ -229,8 +219,11 @@ function userSignOut(){
 document.getElementById("signOutButton").addEventListener("click", userSignOut)
 
 async function openStoryPopup() {
+  updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
+  currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
+
   document.getElementById("story-popup").style.display = "block";
-  document.getElementById("story-popup-content").textContent = "loading"
+  // document.getElementById("story-popup-content").textContent = "loading"
 
   const dream = await getDoc(currentDreamDocRef);
 
@@ -261,8 +254,10 @@ async function openStoryPopup() {
 
 
 async function openAnalysisPopUp() {
+  updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);
+  currentDreamListItem.children[1].innerHTML = document.getElementById("dream-textarea").value;
+
   document.getElementById("analysis-popup").style.display = "block";
-  document.getElementById("analysis-popup-content").textContent = "loading"
 
   const dream = await getDoc(currentDreamDocRef);
 

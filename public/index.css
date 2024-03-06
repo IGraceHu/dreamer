@@ -95,10 +95,9 @@ body {
     height: 97px;
     overflow: hidden;
     color: var(--text-accent-color);
+    transition: all 0.2s;
 }
-.list-group-item *{
-   
-}
+
 #dreams-list .list-group-item h4 {
     color: var(--text-color);
 }
@@ -136,6 +135,10 @@ body {
 
 
 /**************************** DREAMS WRITING PART *****************************/
+#dream-container {
+    width: calc(100vw - 375px);
+}
+
 #dream-text-nav {
     border-bottom: solid 2px var(--border-color);
 }
@@ -147,7 +150,8 @@ body {
 
 #dream-body {
     border: none;
-    height: 100vh;
+    height: auto;
+    width: auto;
 }
 
 #dream-functions {
@@ -169,7 +173,9 @@ body {
 }
 
 #dream-textarea {
-    height: 100vh;
+    height: calc(100vh - 130px);
+    width: 100%;
+
 }
 
 
