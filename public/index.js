@@ -93,6 +93,7 @@ async function getDream(id, userId, dreamListItem) {
   
   dream_textarea_container.innerHTML = '<textarea id="dream-textarea" class="form-control"></textarea>';
   document.getElementById("dream-textarea").value = dream.data().dream;
+  document.getElementById("dream-title").textContent = formatDate(new Date(dream.data().timestamp.seconds*1000));
 
   currentDreamDocRef = dreamRef;
 
@@ -121,7 +122,7 @@ async function newDream(userId) {
   // Create the title element
   const title = document.createElement('h4');
   title.textContent = formatDate(new Date(dream.data().timestamp.seconds*1000)); 
-
+  
   // Create the content element
   const content = document.createElement('div');
 
