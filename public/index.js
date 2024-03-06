@@ -17,8 +17,8 @@ onAuthStateChanged(auth, (user) => {
         generateDreams(user)
         loadUserImage(user)
         document.getElementById("del-dream").addEventListener("click", ()=>delDream()); 
-        document.getElementById("analyze-button").addEventListener("click", ()=>openStoryPopup());
-        document.getElementById("interpret-button").addEventListener("click", ()=>openInterpretationPopup());  
+        document.getElementById("analyze-button").addEventListener("click", ()=>openAnalysisPopUp());
+        document.getElementById("story-button").addEventListener("click", ()=>openStoryPopup());  
 
       // Use userId here
     } else {
@@ -237,8 +237,14 @@ async function openStoryPopup() {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
+  let dream_contents = dream.data().dream;
+  if(dream_contents == ""){
+    document.getElementById("story-popup-content").innerHTML = "Please write a dream before creating a story."
+    return;
+  }
+
   var raw = JSON.stringify({
-    "dream": dream.data().dream
+    "dream": dream_contents
   });
 
   var requestOptions = {
@@ -254,17 +260,23 @@ async function openStoryPopup() {
   }
 
 
-async function openInterpretationPopup() {
-  document.getElementById("interpretation-popup").style.display = "block";
-  document.getElementById("interpretation-popup-content").textContent = "loading"
+async function openAnalysisPopUp() {
+  document.getElementById("analysis-popup").style.display = "block";
+  document.getElementById("analysis-popup-content").textContent = "loading"
 
   const dream = await getDoc(currentDreamDocRef);
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
+  let dream_contents = dream.data().dream;
+  if(dream_contents == ""){
+    document.getElementById("analysis-popup-content").innerHTML = "Please write a dream before analyzing."
+    return;
+  }
+
   var raw = JSON.stringify({
-    "dream": dream.data().dream
+    "dream": dream_contents
   });
 
   var requestOptions = {
@@ -275,7 +287,7 @@ async function openInterpretationPopup() {
 
   fetch("https://dreamjournalnode-6dhtfkqjha-uc.a.run.app/interpret", requestOptions)
     .then(response => response.text())
-    .then(response => document.getElementById("interpretation-popup-content").innerHTML = boldText(response))
+    .then(response => document.getElementById("analysis-popup-content").innerHTML = boldText(response))
     .catch(error => console.log('error', error));
   }
 
