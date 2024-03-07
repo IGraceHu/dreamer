@@ -29,6 +29,14 @@ body {
 
 /********************************** NAVBARS ***********************************/
 
+#logo{
+    position: absolute;
+    font-family: "Modak" !important;
+    font-size: 40px !important;
+    margin: 0px !important;
+    height: 38px;
+    top: 0px;
+}
 #main-top-nav {
     background: linear-gradient(to left,#b15eb2, var(--main-color));
 }
