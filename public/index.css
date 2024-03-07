@@ -52,7 +52,7 @@ body {
     --bs-nav-link-hover-color: var(--text-hover-accent-color);
     /* --bs-nav-link-disabled-color: ; */
     --bs-nav-pills-link-active-color: var(--text-dark-color);
-    --bs-nav-pills-link-active-bg: var(--primary-accent-color);
+    --bs-nav-pills-link-active-bg: var(--secondary-accent-color);
 }
 
 .nav-item {
@@ -63,13 +63,12 @@ body {
     font-size: 32px;
 }
 
-#userImage {
+#user-image {
     width: 50px;
     border-radius: 100px;
 }
-#signOutButton {
-    border: solid mintcream;        /* background color */
-    border-radius: 100px;
+
+#sign-out-button {
     margin-left: auto;
     margin-right: 20px;
     font-size: large;

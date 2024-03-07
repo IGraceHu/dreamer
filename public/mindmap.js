@@ -42,7 +42,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 async function loadUserImage(user) {
-  document.getElementById("userImage").src = user.photoURL
+  document.getElementById("user-image").src = user.photoURL
 }
 async function generateDreams(userId) {
 
