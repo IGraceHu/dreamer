@@ -27,8 +27,8 @@
   <nav id="main-top-nav" class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
       <a id="logo" class="navbar-brand" href="#">Dreamer</a>
-      <button id="signOutButton">Sign Out</button>
-      <img id="userImage"/>
+      <button type="button" id="sign-out-button" class="btn btn-light">Sign Out</button>
+      <img id="user-image"/>
     </div>
   </nav>
 
@@ -49,10 +49,16 @@
 
     <!-------------------- DREAMS NOTE LIST ----------------------------------->
     <div id="dreams-list-container" class="">
-      <div id="dreams-top"><h1>Dreams<i class="bi-calendar-event" style="float: right;"></i></h1></div>
-        <ul id="dreams-list" class="list-group">
-          <li id="new-dream" class="list-group-item"><i class="bi-plus"></i></li>
-        </ul>
+      <div id="dreams-top">
+        <h1>
+          Dreams
+          <i class="bi-calendar-event" style="float: right;"></i>
+          <i id="new-dream-icon" class="bi-plus" style="float: right;"></i>
+        </h1>
+      </div>
+      <ul id="dreams-list" class="list-group">
+        <li id="new-dream" class="list-group-item"><i class="bi-plus"></i></li>
+      </ul>
     </div>
     
     <!-------------------- CONTENT CONTAINER ---------------------------------->

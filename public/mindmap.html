@@ -25,8 +25,8 @@
   <nav id='main-top-nav' class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Dreamer</a>
-      <button id="signOutButton">Sign Out</button>
-      <img id="userImage"/>
+      <button type="button" id="sign-out-button" class="btn btn-light">Sign Out</button>
+      <img id="user-image"/>
     </div>
   </nav>
 
@@ -46,18 +46,19 @@
   <div id="main-body" class="row align-items-start">
 
     <!-------------------- DREAMS NOTE LIST ----------------------------------->
-    <div id="dreams-list-container" class="col-4">
-      <div id="dreams-top"><h1>Dreams<i class="bi-calendar-event" style="float: right;"></i></h1></div>
-        <ul id="dreams-list" class="list-group">
+    <div id="dreams-list-container" class="">
+      <div id="dreams-top">
+        <h1>Mind Map</h1>
+        <p>Click and drag your dreams onto the page!</p>
+      </div>
+      <ul id="dreams-list" class="list-group">
 
-        </ul>
+      </ul>
     </div>
     
     <!-------------------- CONTENT CONTAINER ---------------------------------->
-    <div class="col-8">
-      <h1>Welcome to the mind map</h1>
-      <h5>Try Dragging dreams from the left!</h5>
-        <div class="mindmap-container" id="mindmap-container"></div>
+    <div id="dream-container">
+      <div class="mindmap-container" id="mindmap-container"></div>
  
     </div>
   </div>

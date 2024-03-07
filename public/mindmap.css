@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 .mindmap-element {
     position: absolute;
     top:100px;
@@ -6,10 +10,6 @@
 .mindmap-container {
     height: 100vh;
     width: 100vw;
-}
-.col-8 {
-    display:flex;
-    flex-direction: column;
 }
 
 .mindmap-element {
