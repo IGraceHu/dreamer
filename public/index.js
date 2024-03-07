@@ -16,6 +16,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         generateDreams(user)
         loadUserImage(user)
+        document.getElementById("new-dream-icon").addEventListener("click", ()=>newDream(user.uid)); 
         document.getElementById("del-dream").addEventListener("click", ()=>delDream()); 
         document.getElementById("analyze-button").addEventListener("click", ()=>openAnalysisPopUp());
         document.getElementById("story-button").addEventListener("click", ()=>openStoryPopup());  
@@ -216,7 +217,7 @@ function userSignOut(){
       });
 }
 
-document.getElementById("signOutButton").addEventListener("click", userSignOut)
+document.getElementById("sign-out-button").addEventListener("click", userSignOut)
 
 async function openStoryPopup() {
   updateRecord(currentDreamDocRef, document.getElementById("dream-textarea").value);

@@ -140,6 +140,11 @@ body {
     color: var(--text-color);
 }
 
+#new-dream-icon:hover {
+    color: var(--text-hover-color);
+    cursor: pointer;
+}
+
 
 /**************************** DREAMS WRITING PART *****************************/
 #dream-container {
