@@ -289,3 +289,22 @@ async function openAnalysisPopUp() {
   function boldText(text) {
     return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
   }
+
+  let prev_dream;
+  async function save(){
+    if (!document.getElementById("dream-textarea")){
+      return;
+    }
+    let dream = document.getElementById("dream-textarea").value;
+    
+    if (prev_dream == dream)
+    {
+      return;
+    }
+    console.log("progress saved")
+    await updateRecord(currentDreamDocRef, dream);
+    prev_dream = dream;
+  }
+
+  setInterval(save, 2000);
+
