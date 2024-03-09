@@ -206,7 +206,7 @@ function userSignOut() {
     console.log("Sign out error: " + error)
   });
 }
-document.getElementById("signOutButton").addEventListener("click", userSignOut)
+document.getElementById("sign-out-button").addEventListener("click", userSignOut)
 
 //Exposes the p5 functions to the browser
 window.setup = setup;
