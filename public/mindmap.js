@@ -5,6 +5,7 @@ const dreams_list = document.getElementById("dreams-list");
 const dream_container = document.getElementById("dream-container");
 // const mindmap_container = document.getElementById("mindmap-container");
 // mindmap_container.addEventListener('drop', drop)
+dream_container.style.cursor = "none";
 
 function setup() {
   var canvas = createCanvas(window.innerWidth, window.innerHeight);
@@ -17,13 +18,31 @@ let dragging = false;
 let dotDragStartCoords = [0,0]
 let lines = []
 function draw() {
-  clear()
+  clear();
+  //background('rgba(90%,80%,100%,0.5)');
+
+  // custom cursor
+  noStroke();
+  fill('rgba(203, 75, 178, 0.2)');
+  circle(mouseX, mouseY, 40);
+  fill('rgba(203, 75, 178, 0.4)');
+  circle(mouseX, mouseY, 30);
+  fill('rgba(203, 75, 178, 0.6)');
+  circle(mouseX, mouseY, 20);
+  fill('rgba(203, 75, 178, 0.8)');
+  circle(mouseX, mouseY, 10);
+
+
+
   if(dragging){
-    line(dotDragStartCoords[0], dotDragStartCoords[1], mouseX, mouseY)
+    stroke('rgba(203, 75, 178, 1)');
+    line(dotDragStartCoords[0], dotDragStartCoords[1], mouseX, mouseY);
   }
+
   for (const element in lines){
-    const lineData = lines[element]
-    line(lineData[0], lineData[1], lineData[2], lineData[3])
+    stroke('rgba(203, 75, 178, 1)');
+    const lineData = lines[element];
+    line(lineData[0], lineData[1], lineData[2], lineData[3]);
   }
 }
 
