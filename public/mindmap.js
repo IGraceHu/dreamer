@@ -163,7 +163,6 @@ function closeDream(map_element){
 }
 
 function dotDragStart(event){
-
   dragging = true;
   dotDragStartCoords = [mouseX, mouseY]
   console.log("dot drag start")
