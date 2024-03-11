@@ -22,10 +22,11 @@ p {
 }
 
 .mindmap-element {
-    border: solid;
+    border: none;
     border-radius: 10px;
     padding:10px;
     max-width: 250px;
+    background-color: rgb(203, 75, 178, 0.2);
 }
 
 .selection-dot {
@@ -36,8 +37,7 @@ p {
     width: 10px; /* Adjust size as needed */
     height: 10px; /* Adjust size as needed */
     border-radius: 50%; /* Make it a circle */
-    background-color: black;
-
+    background-color: rgba(122, 2, 122, 0.5);;
 }
 
 .top{
@@ -78,3 +78,4 @@ p {
 #dreams-list .list-group-item {
     user-select: all;
 }
+
