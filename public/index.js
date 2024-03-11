@@ -14,6 +14,7 @@ const dream_functions = document.getElementById("dream-functions");
 const calendar_container = document.getElementById("calendar-container");
 
 
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
         generateDreams(user)
@@ -22,6 +23,7 @@ onAuthStateChanged(auth, (user) => {
         document.getElementById("del-dream").addEventListener("click", ()=>delDream()); 
         document.getElementById("analyze-button").addEventListener("click", ()=>openAnalysisPopUp());
         document.getElementById("story-button").addEventListener("click", ()=>openStoryPopup());  
+        document.getElementById("visualize-button").addEventListener("click", ()=>openVisualizationPopup());  
 
         document.getElementById("calendar-button").addEventListener("click", ()=>toggleCalendar()); 
         document.getElementById("calendar-container").style.width = "700px";
@@ -55,7 +57,8 @@ async function generateDreams(userId){
     
         const newDream = document.createElement('li')
         newDream.classList.add('list-group-item'); 
-        newDream.addEventListener("click", ()=>getDream(doc.id, userId.uid, newDream)); 
+        newDream.addEventListener("click", ()=>getDream(doc.id, userId.uid, newDream));
+ 
     
         // Create the title element
         const title = document.createElement('h4');
@@ -327,3 +330,41 @@ async function save(){
 }
 
 setInterval(save, 2000);
+
+function openVisualizationPopup(){
+  isPirateDemo()
+  document.getElementById("visualize-popup").style.display = "block";
+
+  let parent = document.getElementById("visualize-popup-content");
+
+  const video = document.createElement("video");
+  video.src = "./videos/ships-in-coffee.mp4";
+  video.style = "width:100%;border-radius:8px;"
+  video.autoplay = true;
+  video.loop = true;
+
+  setTimeout(()=>{
+    parent.replaceChildren(video);
+  }, 6000)
+
+}
+
+let prev_dream_ref;
+
+async function isPirateDemo(){
+  let visualize_button = document.getElementById("visualize-button");
+  if(!visualize_button || prev_dream_ref == currentDreamDocRef){
+    return;
+  }
+  const dream = await getDoc(currentDreamDocRef);
+
+  let dream_contents = dream.data().dream;
+
+  if(dream_contents.substring(0, 10) == "Surrounded"){
+    console.log("MATCHED")
+    visualize_button.style.display = "block";
+  }
+  prev_dream_ref = currentDreamDocRef;
+}
+
+window.setInterval(isPirateDemo, 100)

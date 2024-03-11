@@ -190,7 +190,35 @@
           </div>
         </div>
         
+        <div id="visualize-popup" class="popup-container">
+          <div class="card popup-card">
+            <div class="card-body">
+              <button type="button" class="btn-close" aria-label="Close" onclick="closePopups()"></button>
+              <h2 class="card-title">Your visualization</h2>
+              <p id="visualize-popup-content" class="card-text placeholder-glow">
+                <span class="placeholder col-1"></span>
+                <span class="placeholder col-1"></span>
+                <span class="placeholder col-3"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-3"></span>
+                <span class="placeholder col-2"></span>
+                <span class="placeholder col-5"></span>
+                <span class="placeholder col-1"></span>
+                <span class="placeholder col-2"></span>
+                <span class="placeholder col-3"></span>
+                <span class="placeholder col-2"></span>
+                <span class="placeholder col-3"></span>
+                <span class="placeholder col-3"></span>
+                <span class="placeholder col-1"></span>
+              </p>
+            </div>
+          </div>
+        </div>
         <ul id="dream-functions" class="invisible">
+          <li id="visualize-button" style="display:none" type="button" class="btn btn-primary">
+            <i class="bi bi-film"></i>
+            Visualize
+          </li>
           <li id="story-button" type="button" class="btn btn-primary">
             <i class="bi-book-half"></i>
             Story
@@ -212,6 +240,7 @@
   function closePopups(){
       document.getElementById("analysis-popup").style.display = "none";
       document.getElementById("story-popup").style.display = "none";
+      document.getElementById("visualize-popup").style.display = "none";
     }
 </script>
 
