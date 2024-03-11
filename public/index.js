@@ -310,10 +310,6 @@ function toggleCalendar() {
   }
 }
 
-function boldText(text) {
-  return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-}
-
 let prev_dream;
 async function save(){
   if (!document.getElementById("dream-textarea")){
