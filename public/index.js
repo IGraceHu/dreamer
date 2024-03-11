@@ -11,6 +11,8 @@ const dream_textarea_container = document.getElementById("dream-textarea-contain
 
 const dream_hotbar = document.getElementById("dream-text-nav");
 const dream_functions = document.getElementById("dream-functions");
+const calendar_container = document.getElementById("calendar-container");
+
 
 
 onAuthStateChanged(auth, (user) => {
@@ -22,6 +24,10 @@ onAuthStateChanged(auth, (user) => {
         document.getElementById("analyze-button").addEventListener("click", ()=>openAnalysisPopUp());
         document.getElementById("story-button").addEventListener("click", ()=>openStoryPopup());  
         document.getElementById("visualize-button").addEventListener("click", ()=>openVisualizationPopup());  
+
+        document.getElementById("calendar-button").addEventListener("click", ()=>toggleCalendar()); 
+        document.getElementById("calendar-container").style.width = "700px";
+
 
       // Use userId here
     } else {
@@ -102,6 +108,10 @@ async function getDream(id, userId, dreamListItem) {
   currentDreamDocRef = dreamRef;
 
   updateDreamBody();
+
+  if (calendar_container.style.width == "700px") {
+    toggleCalendar()
+  }
   return 0;
 }
 
@@ -288,64 +298,73 @@ async function openAnalysisPopUp() {
     .then(response => response.text())
     .then(response => document.getElementById("analysis-popup-content").innerHTML = boldText(response))
     .catch(error => console.log('error', error));
+}
+
+function boldText(text) {
+  return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+}
+
+function toggleCalendar() {
+  // Animate it
+  if (calendar_container.style.width == "700px") {
+    calendar_container.style.width = "0px";
+  } else {
+    calendar_container.style.width = "700px";
   }
+}
 
-  function boldText(text) {
-    return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+let prev_dream;
+async function save(){
+  if (!document.getElementById("dream-textarea")){
+    return;
   }
-
-  let prev_dream;
-  async function save(){
-    if (!document.getElementById("dream-textarea")){
-      return;
-    }
-    let dream = document.getElementById("dream-textarea").value;
-    
-    if (prev_dream == dream)
-    {
-      return;
-    }
-    console.log("progress saved")
-    await updateRecord(currentDreamDocRef, dream);
-    prev_dream = dream;
+  let dream = document.getElementById("dream-textarea").value;
+  
+  if (prev_dream == dream)
+  {
+    return;
   }
+  console.log("progress saved")
+  await updateRecord(currentDreamDocRef, dream);
+  prev_dream = dream;
+}
 
-  setInterval(save, 2000);
+setInterval(save, 2000);
 
-  function openVisualizationPopup(){
-    isPirateDemo()
-    document.getElementById("visualize-popup").style.display = "block";
+function openVisualizationPopup(){
+  isPirateDemo()
+  document.getElementById("visualize-popup").style.display = "block";
 
-    let parent = document.getElementById("visualize-popup-content");
+  let parent = document.getElementById("visualize-popup-content");
 
-    const video = document.createElement("video");
-    video.src = "./videos/ships-in-coffee.mp4";
-    video.style = "width:100%;border-radius:8px;"
-    video.autoplay = true;
-    video.loop = true;
+  const video = document.createElement("video");
+  video.src = "./videos/ships-in-coffee.mp4";
+  video.style = "width:100%;border-radius:8px;"
+  video.autoplay = true;
+  video.loop = true;
 
-    setTimeout(()=>{
-      parent.replaceChildren(video);
-    }, 6000)
+  setTimeout(()=>{
+    parent.replaceChildren(video);
+  }, 6000)
 
+}
+
+let prev_dream_ref;
+
+async function isPirateDemo(){
+  let visualize_button = document.getElementById("visualize-button");
+  if(!visualize_button || prev_dream_ref == currentDreamDocRef){
+    return;
   }
+  const dream = await getDoc(currentDreamDocRef);
 
-  let prev_dream_ref;
+  let dream_contents = dream.data().dream;
 
-  async function isPirateDemo(){
-    let visualize_button = document.getElementById("visualize-button");
-    if(!visualize_button || prev_dream_ref == currentDreamDocRef){
-      return;
-    }
-    const dream = await getDoc(currentDreamDocRef);
-
-    let dream_contents = dream.data().dream;
-
-    if(dream_contents.substring(0, 10) == "Surrounded"){
-      console.log("MATCHED")
-      visualize_button.style.display = "block";
-    }
-    prev_dream_ref = currentDreamDocRef;
+  if(dream_contents.substring(0, 10) == "Surrounded"){
+    console.log("MATCHED")
+    visualize_button.style.display = "block";
   }
+  prev_dream_ref = currentDreamDocRef;
+}
 
-  window.setInterval(isPirateDemo, 100)
+window.setInterval(isPirateDemo, 100)

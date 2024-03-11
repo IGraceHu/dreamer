@@ -1,6 +1,15 @@
+/**************************** GENERAL STYLING *********************************/
+
 body {
     overflow: hidden;
 }
+
+p {
+    text-align: justify;
+    hyphens: auto;
+}
+
+/******************************** MINDMAP *************************************/
 
 .mindmap-element {
     position: absolute;
@@ -18,10 +27,7 @@ body {
     padding:10px;
     max-width: 250px;
 }
-p {
-    text-align: justify;
-    hyphens: auto;
-}
+
 .selection-dot {
     cursor: move;
     position: absolute; /* Position the dot relative to the main div */
