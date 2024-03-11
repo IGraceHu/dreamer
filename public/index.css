@@ -152,7 +152,7 @@ body {
     cursor: pointer;
 }
 
-#calendar-container {
+#calendar-container { 
     width: 700px;
     height: 100vh;
     border-right: solid 2px var(--border-color);
