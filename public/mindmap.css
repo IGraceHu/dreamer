@@ -2,6 +2,15 @@ body {
     overflow: hidden;
 }
 
+#logo {
+    position: absolute;
+    font-family: "Modak" !important;
+    font-size: 40px !important;
+    margin: 0px !important;
+    height: 38px;
+    top: 0px;
+}
+
 .mindmap-element {
     position: absolute;
     top:100px;
