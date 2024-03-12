@@ -75,7 +75,7 @@ async function generateDreams(userId) {
 
     const newDream = document.createElement('li')
     newDream.classList.add('list-group-item');
-    newDream.addEventListener("click", function () { getDream(doc.id, userId.uid); });
+    //newDream.addEventListener("click", function () { getDream(doc.id, userId.uid); });
     newDream.addEventListener('dragstart', dragStart);
     newDream.addEventListener('dragend', dragEnd);
 
@@ -163,7 +163,6 @@ function closeDream(map_element){
 }
 
 function dotDragStart(event){
-
   dragging = true;
   dotDragStartCoords = [mouseX, mouseY]
   console.log("dot drag start")

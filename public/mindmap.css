@@ -27,6 +27,7 @@ p {
     padding:10px;
     max-width: 250px;
     background-color: rgb(203, 75, 178, 0.2);
+    color: #5a305a;
 }
 
 .selection-dot {
@@ -75,7 +76,10 @@ p {
 }
 
 
+
 #dreams-list .list-group-item {
     user-select: all;
+    color: #b15eb2;
 }
+
 
